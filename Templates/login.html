@@ -5,28 +5,38 @@
 
 <br>
 <div class="wrapper ">
-    <div id="formContent">
-      <!-- Tabs Titles -->
-  
-      <!-- Icon -->
-      <div class=" first">
-       <h1>Login</h1>
-      </div>
-  
-      <!-- Login Form -->
-      <form>
-        
-        <input type="text" id="email" class=" second" name="registration" placeholder="Email">
-        <input type="password" id="password" class=" third" name="registration" placeholder="Password">
-        <input type="submit" class=" fourth" value="Login">
-      </form>
-  
-      <!-- Remind Passowrd -->
-      <div id="formFooter">
-        <a class="underlineHover" href=" {% url 'registration' %}">Create a account</a>
-      </div>
-  
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class=" first">
+      <h1>Login</h1>
     </div>
+
+    <!-- Login Form -->
+
+    <form action="login" method="POST">
+      {% csrf_token %}
+
+
+
+      <input type="text" name="username" placeholder="Email">
+      <input type="password" name="password" placeholder="Password">
+      <input type="submit" class=" fourth" value="Login">
+    </form><br>
+    <div>
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+    </div>
+
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href=" {% url 'registration' %}">Create a account</a>
+    </div>
+
   </div>
+</div>
 
 {% endblock %}
