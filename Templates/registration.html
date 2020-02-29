@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<br>
+<div class="wrapper ">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class=" first">
+       <h1>Registration</h1>
+      </div>
+  
+      <!-- Login Form -->
+      <form>
+        <input type="text" id="firstname" class=" second" name="registration" placeholder="First Name">
+        <input type="text" id="lastname" class=" third" name="registration" placeholder="Last Name">
+        <input type="text" id="email" class=" second" name="registration" placeholder="Email">
+        <input type="text" id="username" class=" second" name="registration" placeholder="Username">
+        <input type="password" id="password" class=" third" name="registration" placeholder="Password">
+        <input type="submit" class=" fourth" value="Registration">
+      </form>
+  
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="/">Login account</a>
+      </div>
+  
+    </div>
+  </div>
+
+{% endblock %}

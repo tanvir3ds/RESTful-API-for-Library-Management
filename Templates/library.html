@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br><br>
+
+
+
+<div class="container">
+    <h1>Books</h1>
+    <div class="row">
+
+        {% for booklist in booklists %}
+
+        <!--Card-------------------------->
+        <div class="col-sm-3">
+            <div class="card" style="width: 16rem;">
+                <img src="{{booklist.img.url}}" class="card-img-top" alt="..." height="181px" width="288px">
+                <div class="card-body">
+                    <h5 class="card-title">{{booklist.title}}</h5>
+                    <p class="card-text">---------Author : {{booklist.Book_Author.name}} </p>
+                    <p class="card-text">----------Price :{{booklist.price}}</p>
+                    
+                    <a href="/add/{{ booklist.id }}" class="btn btn-primary">add now</a>
+
+                    
+                </div>
+            </div>
+            <br><br>
+        </div>
+        <!--Card end-------------------------->
+
+        {% endfor %}
+
+
+
+    </div>
+    <!--row-->
+
+</div>
+<!--container-->
+
+
+
+
+
+
+
+{% endblock %}
