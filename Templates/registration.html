@@ -14,18 +14,30 @@
       </div>
   
       <!-- Login Form -->
-      <form>
-        <input type="text" id="firstname" class=" second" name="registration" placeholder="First Name">
-        <input type="text" id="lastname" class=" third" name="registration" placeholder="Last Name">
-        <input type="text" id="email" class=" second" name="registration" placeholder="Email">
-        <input type="text" id="username" class=" second" name="registration" placeholder="Username">
-        <input type="password" id="password" class=" third" name="registration" placeholder="Password">
-        <input type="submit" class=" fourth" value="Registration">
+      <form action="registration" method="POST">
+        {% csrf_token %}
+        
+
+
+        <input type="text" name="first_name" placeholder="First Name">
+        <input type="text" name="last_name" placeholder="Last Name">
+        <input type="email"  name="email" placeholder="Email">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password"  name="password1" placeholder="Password">
+        <input type="password" name="password2" placeholder="Password">
+
+        <input type="submit" class=" fourth" value="registration">
       </form>
+      <br>
+      <div>
+          {% for message in messages %}
+          <h3>{{message}}</h3>
+          {% endfor %}
+      </div>
   
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="/">Login account</a>
+        <a class="underlineHover" href="{% url 'login' %}">Login account</a>
       </div>
   
     </div>

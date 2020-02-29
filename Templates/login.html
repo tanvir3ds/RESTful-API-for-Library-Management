@@ -2,27 +2,28 @@
 {% block content %}
 
 
-<br><br><br>
+
+<br>
 <div class="wrapper ">
     <div id="formContent">
       <!-- Tabs Titles -->
   
       <!-- Icon -->
       <div class=" first">
-       <h1>User</h1>
+       <h1>Login</h1>
       </div>
   
       <!-- Login Form -->
       <form>
-        <input type="text" id="login" class=" second" name="login" placeholder="login">
-        <input type="password" id="password" class=" third" name="login" placeholder="password">
-        <input type="submit"  class=" fourth" value="Log In">
+        
+        <input type="text" id="email" class=" second" name="registration" placeholder="Email">
+        <input type="password" id="password" class=" third" name="registration" placeholder="Password">
+        <input type="submit" class=" fourth" value="Login">
       </form>
   
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="{% url 'registration' %}">Create a account</a>
-        <br><a class="underlineHover" href="{% url 'library' %}">library</a>
+        <a class="underlineHover" href=" {% url 'registration' %}">Create a account</a>
       </div>
   
     </div>
