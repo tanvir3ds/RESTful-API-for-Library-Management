@@ -62,7 +62,8 @@ def registration(request):
                 user.save()
                 
                 messages.info(request, 'user created')
-                return redirect ('registration')
+                return redirect ('login')
+                
 
         else:
             messages.info(request, 'password not matching')
@@ -80,3 +81,7 @@ def home(request):
     booklists = BookList.objects.all()
 
     return render(request, 'library.html', {'booklists':booklists,} )
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
