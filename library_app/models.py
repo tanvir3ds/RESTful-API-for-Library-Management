@@ -39,3 +39,6 @@ class LoanList(models.Model):
     book= models.ManyToManyField(BookList, null=True, blank=True)
     user= models.ManyToManyField(User, null=True, blank=True)
 
+    def __str__(self):
+        return self.user.username  
+
