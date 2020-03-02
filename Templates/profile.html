@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<div class="container">
+  <br><br><br>
+
+
+
+<h1>Profile</h1>
+<p> <h1 style="color: black;">Username : {{user.first_name}}</h1></p>
+<p> <h1 style="color: black;">Username : {{user.last_name}}</h1></p>
+
+<img class="rounded-circle account-img" src="{{user.userprofile.img.url}}" width="240" height="250px">  
+
+
+<form action="/uploadimage/{{ user.userprofile.id }}" >
+  {% csrf_token %}
+  <input type="file" name="fileToUpload" id="fileToUpload">
+  <input type="submit" value="Upload Image" name="submit">
+  </form>
+</div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

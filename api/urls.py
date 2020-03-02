@@ -17,6 +17,7 @@ urlpatterns = [
     path('books/<int:pk>/', BooksAPIDetailView.as_view()),
     path('books/new/', BooksAPINewView.as_view()),
     path('authors/new/', AuthorsAPINewView.as_view()),
+    
     path('user/', UserAPIView.as_view()),
     path('user/<int:pk>/', UserAPIDetailView.as_view()),
 

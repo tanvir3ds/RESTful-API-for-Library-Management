@@ -6,7 +6,7 @@ from django.contrib import messages
 
 # import model
 from . models import Author
-from . models import BookList
+from . models import BookList,LoanList,Userprofile
 
 # Create your views here.
 
@@ -85,3 +85,46 @@ def home(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def ShowBook(request, id):
+     showbooks = BookList.objects.get(pk=id)
+     booklists = BookList.objects.all()
+
+     return render(request, 'showbook.html', {'showbooks':showbooks,'booklists':booklists } )
+
+def LoanBook(request):
+    title = request.GET['title']
+    loan_list = LoanList(book_name=title)
+    loan_list.save()
+    
+
+    return redirect('/')
+
+
+
+def Profile(request):
+    userprofiles= Userprofile.objects.all()
+    
+
+    return render(request, 'profile.html',{'userprofiles':userprofiles,} )
+
+
+def UploadImage(request, id):
+    userprofiles= Userprofile.objects.get(pk=id)
+    userprofiles.img= request.GET['fileToUpload']
+    userprofiles.save()
+     
+    return redirect('/')
+
+
+
+
+
+
+
+    
+
+
+
+
+
