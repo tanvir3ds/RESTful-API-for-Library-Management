@@ -12,6 +12,8 @@ urlpatterns = [
     path('', include('library_app.urls')),
     path('api/', include('api.urls')),
     
+    path('api/rest-auth/', include('rest_auth.urls')),
+    
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

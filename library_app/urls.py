@@ -11,6 +11,7 @@ urlpatterns = [
     path('loanbook', views.LoanBook, name='loanbook' ),
     path('profile', views.Profile, name='profile' ),
     path('uploadimage/<id>/', views.UploadImage, name='upload' ),
+    
 
     
 
