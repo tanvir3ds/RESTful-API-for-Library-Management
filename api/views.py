@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from .serializers import BookListSerializer
 from .serializers import AuthorSerializer
 from .serializers import UserSerializer
-from .serializers import LoanBookListSerializer
+from .serializers import LoanBookListSerializer,NewLoanBookListSerializer
 
 
 class BooksAPIView(generics.ListAPIView):
@@ -68,6 +68,6 @@ class LoanBooksAPIView(generics.ListAPIView):
 class LoanBooksAPINewView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = BookLoan.objects.all().order_by('-id')[:1] # latest 
-    serializer_class = LoanBookListSerializer
+    serializer_class = NewLoanBookListSerializer
 
 

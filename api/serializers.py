@@ -31,6 +31,16 @@ class LoanBookListSerializer(serializers.ModelSerializer):
         model = BookLoan 
         
         fields = ('__all__')
+
+
+class NewLoanBookListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookLoan 
+        
+        fields = ['user', 'Book', 'quantity', 'ordered_date', ]
+
+
+        
         
 
     
