@@ -7,6 +7,9 @@ from . views import BooksAPINewView
 from . views import AuthorsAPINewView
 from . views import UserAPIView
 from . views import UserAPIDetailView
+from . views import LoanBooksAPIView
+from . views import LoanBooksAPINewView
+
 
 
 
@@ -20,5 +23,11 @@ urlpatterns = [
     
     path('user/', UserAPIView.as_view()),
     path('user/<int:pk>/', UserAPIDetailView.as_view()),
+
+
+    path('loanbooks/', LoanBooksAPIView.as_view()),
+    path('loanbooks/new/', LoanBooksAPINewView.as_view()),
+
+
 
 ]

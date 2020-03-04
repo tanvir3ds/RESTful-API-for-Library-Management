@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from library_app.models import BookList
+from library_app.models import BookList, BookLoan
 from library_app.models import Author
 from django.contrib.auth.models import User
 
@@ -22,6 +22,13 @@ class AuthorSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
+        
+        fields = ('__all__')
+        
+
+class LoanBookListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookLoan 
         
         fields = ('__all__')
         

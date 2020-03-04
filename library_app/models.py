@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
@@ -34,11 +35,16 @@ class Userprofile(models.Model):
     def __str__(self):
         return self.user.username  
 
-
-class LoanList(models.Model):
-    book= models.ManyToManyField(BookList, null=True, blank=True)
-    user= models.ManyToManyField(User, null=True, blank=True)
+class BookLoan(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    Book = models.ForeignKey(BookList, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    ordered_date = models.DateTimeField(auto_now_add=True)
+    
+    Accepted = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username  
+        return self.Book.title 
+
 

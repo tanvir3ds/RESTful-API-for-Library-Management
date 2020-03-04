@@ -6,7 +6,7 @@ from django.contrib import messages
 
 # import model
 from . models import Author
-from . models import BookList,LoanList,Userprofile
+from . models import BookList,Userprofile
 
 # Create your views here.
 
@@ -92,13 +92,6 @@ def ShowBook(request, id):
 
      return render(request, 'showbook.html', {'showbooks':showbooks,'booklists':booklists } )
 
-def LoanBook(request):
-    title = request.GET['title']
-    loan_list = LoanList(book_name=title)
-    loan_list.save()
-    
-
-    return redirect('/')
 
 
 
