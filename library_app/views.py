@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
@@ -6,7 +6,8 @@ from django.contrib import messages
 
 # import model
 from . models import Author
-from . models import BookList,Userprofile
+from . models import BookList,Userprofile,BookLoan
+from django.http import Http404
 
 # Create your views here.
 
@@ -87,10 +88,18 @@ def logout(request):
     return redirect('/')
 
 def ShowBook(request, id):
-     showbooks = BookList.objects.get(pk=id)
-     booklists = BookList.objects.all()
-
-     return render(request, 'showbook.html', {'showbooks':showbooks,'booklists':booklists } )
+    if request.method == "GET":
+        showbooks = BookList.objects.get(pk=id)
+        booklists = BookList.objects.all()
+        return render(request, 'showbook.html', {'showbooks':showbooks,'booklists':booklists } )
+    else:
+        try:
+            bookInstance=get_object_or_404(BookList, id=id)
+            myObj=BookLoan.objects.create(user=request.user, Book=bookInstance)
+            myObj.save()
+            return redirect('showbook', id=id)
+        except:
+            return Http404("No book found to save")
 
 
 
@@ -108,6 +117,7 @@ def UploadImage(request, id):
     userprofiles.save()
      
     return redirect('/')
+
 
 
 
