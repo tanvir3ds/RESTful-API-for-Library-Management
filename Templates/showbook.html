@@ -2,86 +2,100 @@
 {% block content %}
 
 
-
+<!-- Page Content -->
 <div class="container">
-  <br><br><br>
-  <div class="card mb-3" style="max-width: 700px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="{{showbooks.img.url}}" class="card-img" alt="...">
+
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Portfolio Item
+    <small>Subheading</small>
+  </h1>
+
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="index.html">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Portfolio Item</li>
+  </ol>
+  <div class="container">
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+      <div class="col-md-6">
+        <img class="img-fluid" src="{{showbooks.img.url}}" alt="" width="400" height="500">
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h1 class="card-title" >{{ showbooks.title }}</h1>
-          <p class="card-text"><h2 style="color: brown;"> Author : {{showbooks.Book_Author.name}}</h2></p>
-          <p class="card-text"><h2 style="color: brown;"> Price : {{showbooks.price}} BDT </h2></p>
+
+
+
+      <div class="col-md-6">
+        <h3 class="my-3">Book Name</h3>
+        <p>{{ showbooks.title }}</p>
+        <h3 class="my-3">Book Details</h3>
+        <ul>
+          <li> Author : {{showbooks.Book_Author.name}}</li>
           
-         
-        </div>
+        </ul>
+        <h3 class="my-3">Book Price</h3>
+        <ul>
+          
+          <li>Price : {{showbooks.price}} BDT</li>
+        </ul>
+
+        {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'showbook' showbooks.id %}">
+          {%csrf_token%}
+          <button onclick="myFunction()" class=" fourth">Loan Book</button>
+        </form>
+
+        {% else %}
+        <p>
+          <h3 style="color: red;">Please Login Your Account</h3>
+        </p>
+        {% endif %}
       </div>
-      
     </div>
-    {% if user.is_authenticated %}
-    <form method="POST" action="{% url 'showbook' showbooks.id %}">
-      {%csrf_token%}
-      <button class="btn btn-primary">Loan Book</button>
-      </form>
-    
-    {% else %}
-    <p><h1 style="color: red;">Please Login Your Account</h1> </p>
-    {% endif %}
+
+
+
   </div>
+  <!-- /.row -->
 
 
 
 
 
-  <br><br><h1>Other Books</h1>
-  <div class="row">
 
-      {% for booklist in booklists %}
+<!-- Related Projects Row -->
+<h3 class="my-4">Related Projects</h3>
 
-      <!--Card-------------------------->
-      <div class="col-sm-3">
-          <div class="card" style="width: 15rem;">
-              <img src="{{booklist.img.url}}" class="card-img-top" alt="..." height="181px" width="288px">
-              <div class="card-body">
-                  <h5 class="card-title">{{booklist.title}}</h5>
-                  <p class="card-text">---------Author : {{booklist.Book_Author.name}} </p>
-                  <p class="card-text">----------Price :{{booklist.price}}</p>
-                  
-                  <a href="/showbook/{{ booklist.id }}" class="btn btn-primary">Show Book</a>
-
-                  
-              </div>
-          </div>
-          <br><br>
+<div class="row">
+  {% for booklist in booklists %}
+  <div class="col-md-3 col-sm-6 mb-4">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{booklist.img.url}}" alt="Card image cap" height="161px" width="100px">
+      <div class="card-body">
+        <h5 class="card-title">{{booklist.title}}</h5>
+        <p class="card-text">{{booklist.Book_Author.name}}</p>
+        <a href="{% url 'showbook' booklist.id %}" class="btn btn-primary">Show Book</a>
       </div>
-      <!--Card end-------------------------->
-
-      {% endfor %}
-
-
-
+    </div>
   </div>
-  <!--row-->
 
+  {% endfor %}
 
-
-
-
-
-
-
-
-
-
+</div>
+<!-- /.row -->
 
 
 </div>
 
+</div>
+<!-- /.container -->
 
 
-
-
+<script>
+  function myFunction() {
+    alert("Book is confirm for loan, waiting for admin approval");
+  }
+  </script>
 {% endblock %}

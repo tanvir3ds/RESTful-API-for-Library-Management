@@ -10,6 +10,7 @@ urlpatterns = [
     path('showbook/<id>/', views.ShowBook, name='showbook' ),
     path('profile', views.Profile, name='profile' ),
     path('uploadimage/<id>/', views.UploadImage, name='upload' ),
+    path('order', views.order, name='order' ),
     
 
     

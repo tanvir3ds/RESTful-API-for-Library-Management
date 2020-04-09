@@ -90,14 +90,16 @@ def logout(request):
 def ShowBook(request, id):
     if request.method == "GET":
         showbooks = BookList.objects.get(pk=id)
-        booklists = BookList.objects.all()
+        booklists = BookList.objects.all().order_by('-id')[:4]
         return render(request, 'showbook.html', {'showbooks':showbooks,'booklists':booklists } )
     else:
         try:
             bookInstance=get_object_or_404(BookList, id=id)
             myObj=BookLoan.objects.create(user=request.user, Book=bookInstance)
             myObj.save()
-            return redirect('showbook', id=id)
+            #return redirect('showbook', id=id)
+            return redirect('profile')
+            
         except:
             return Http404("No book found to save")
 
@@ -105,18 +107,26 @@ def ShowBook(request, id):
 
 
 def Profile(request):
-    userprofiles= Userprofile.objects.all()
-    
+    #post= Userprofile.objects.all()
+    posts= BookLoan.objects.filter(user= request.user.id)
 
-    return render(request, 'profile.html',{'userprofiles':userprofiles,} )
+    return render(request, 'profile.html',{'posts':posts} )
 
 
 def UploadImage(request, id):
     userprofiles= Userprofile.objects.get(pk=id)
+    
     userprofiles.img= request.GET['fileToUpload']
     userprofiles.save()
      
     return redirect('/')
+
+
+def order(request):
+    
+    posts= BookLoan.objects.filter(user= request.user.id).order_by('-id')
+
+    return render(request, 'order.html',{'posts':posts} )
 
 
 

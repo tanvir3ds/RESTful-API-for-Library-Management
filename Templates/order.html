@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <br><h3>Your Loan Books</h3><br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Order Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+          <tr>
+            
+            <th scope="row">Items</th>
+            <td>{{post.Book}}</td>
+            <td>{{post.ordered_date}}</td>
+            {% if post.Accepted %}
+            <td>Order Accepted</td>
+            {% else %}
+            <td>Order Pending</td>
+            {% endif %}
+            
+          </tr>
+          {% endfor %}
+        
+        </tbody>
+      </table>
+
+
+
+  
+
+
+</div>
+{% endblock %}
