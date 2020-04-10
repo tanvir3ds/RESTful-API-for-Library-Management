@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from .forms import createForm
 
 
 
@@ -98,7 +99,7 @@ def ShowBook(request, id):
             myObj=BookLoan.objects.create(user=request.user, Book=bookInstance)
             myObj.save()
             #return redirect('showbook', id=id)
-            return redirect('profile')
+            return redirect('order')
             
         except:
             return Http404("No book found to save")
@@ -109,17 +110,30 @@ def ShowBook(request, id):
 def Profile(request):
     #post= Userprofile.objects.all()
     posts= BookLoan.objects.filter(user= request.user.id)
-
-    return render(request, 'profile.html',{'posts':posts} )
-
-
-def UploadImage(request, id):
-    userprofiles= Userprofile.objects.get(pk=id)
     
-    userprofiles.img= request.GET['fileToUpload']
-    userprofiles.save()
-     
-    return redirect('/')
+
+    
+
+    if request.method == 'POST':
+        
+        form = createForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = createForm()
+    return render(request, 'profile.html', {
+        
+        'posts':posts,
+        'form':form,
+    })
+
+
+    #return render(request, 'profile.html',{'posts':posts} )
+
+
+
+
 
 
 def order(request):
@@ -127,6 +141,9 @@ def order(request):
     posts= BookLoan.objects.filter(user= request.user.id).order_by('-id')
 
     return render(request, 'order.html',{'posts':posts} )
+
+
+
 
 
 
