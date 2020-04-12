@@ -20,13 +20,16 @@
 
 
 
-      <input type="text" name="username" placeholder="Email">
+      <input type="text" name="username" placeholder="Username">
       <input type="password" name="password" placeholder="Password">
-      <input type="submit" class=" fourth" value="Login">
+      <input type="submit" class=" fourth btn btn-primary" value="Login">
     </form><br>
     <div>
         {% for message in messages %}
-        <h3>{{message}}</h3>
+        <div>
+          <h6 style="color: red;">{{message}}</h6>            
+        </div>
+        
         {% endfor %}
     </div>
 
@@ -38,5 +41,8 @@
 
   </div>
 </div>
+
+
+
 
 {% endblock %}

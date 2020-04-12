@@ -16,25 +16,22 @@ from django.http import Http404
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST['username']
+        password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
-
+        
         if user is not None:
-            if user.is_active:
-                auth.login(request, user)
-                return redirect('/')
-            else:
-                return redirect('disabled account')
-
+            auth.login(request, user)
+            return redirect('/')
         else:
-            return redirect('/invalid')
+            messages.info(request, 'Enter a valid username & password')
+            return redirect('login')
 
     else:
         return render(request, 'login.html')
         
 
-
+    
 
 
 
@@ -63,7 +60,7 @@ def registration(request):
                 user= User.objects.create_user(username= username, password=password1, email=email, first_name=first_name, last_name=last_name)
                 user.save()
                 
-                messages.info(request, 'user created')
+                messages.info(request, 'enter username & password')
                 return redirect ('login')
                 
 
